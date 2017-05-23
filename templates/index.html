@@ -4,21 +4,32 @@
 	<script src="https://unpkg.com/vue/dist/vue.js"></script>
 {% endblock %}
 
-{% block style %}
-{% endblock %}
-
 {% block body %}
-	<div id="app">
-		[[ message ]]
+	<div id="reverse">
+		<p>[[ message_to_reverse ]]</p>
+		<button v-on:click="reverseMessage">Reverse Message</button>
 	</div>
 
+	<div id="textbox">
+		<p>[[ message ]]</p>
+		<input v-model="message">
+	</div>
+{% endblock %}
+
+{% block footer_script %}
 	<script>
 		var app_ = new Vue({
-			  el: '#app',
-			  delimiters: ["[[", "]]"],
-			  data: {
-			    message: 'Hello Vue!'
-			  }
+			el: '#app',
+			delimiters: ["[[", "]]"],
+			data: {
+			    message_to_reverse: 'Hello Vue.js!',
+			    message: 'Sample Text'
+			},
+			methods: {
+				reverseMessage: function() {
+					this.message_to_reverse = this.message_to_reverse.split('').reverse().join('')
+				}
+			}
 		})
 	</script>
 {% endblock %}
